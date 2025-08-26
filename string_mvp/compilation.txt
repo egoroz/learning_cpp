@@ -1,0 +1,4 @@
+g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror \
+    -Wconversion -Wsign-conversion -Wshadow -Wdouble-promotion \
+    -fsanitize=address,undefined,leak -fno-omit-frame-pointer \
+    string_tests.cpp -lgtest -lgtest_main -lpthread -o string_tests
