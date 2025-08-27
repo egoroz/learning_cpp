@@ -176,8 +176,9 @@ public:
 
 	size_t rfind(const String& substring) const{
 		const char* main_string = str + sz - substring.size();
+		if(str > main_string){return sz;}
 		while(strstr(main_string, static_cast<const char*>(substring)) == nullptr){
-			if(str == main_string--){return sz;}
+			if(str >= main_string--){return sz;}
 		}
 		return static_cast<size_t>(main_string - str);
 	}
