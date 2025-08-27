@@ -1,6 +1,6 @@
 g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror \
     -Wconversion -Wsign-conversion -Wshadow -Wdouble-promotion \
     -fno-omit-frame-pointer \
-    string_tests.cpp -lgtest -lgtest_main -lpthread -o string_tests
+    tests.cpp -lgtest -lgtest_main -lpthread
 
-valgrind ./string_tests
+valgrind ./a.out
