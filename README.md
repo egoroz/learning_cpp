@@ -1,1 +1,1 @@
-# learning_cpp
+# C++ MIPT LABS
