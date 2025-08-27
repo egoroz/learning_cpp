@@ -1,14 +1,13 @@
 #include <iostream>
 #include <cstring>
-//#include <algorithm> // for std::fill and std::copy
 
 class String{
 private:
 	char* str;
 	size_t sz;
 	size_t cap;
-	static constexpr size_t DEFAULT_CAPACITY = 8;
-	static constexpr size_t CAPACITY_EXPANSION = 2;
+	static constexpr size_t kDefaultCapacity = 8;
+	static constexpr size_t kCapacityExpansion = 2;
 
 public:
 	explicit String(const char* other) {
@@ -47,13 +46,11 @@ public:
 		std::swap(cap, other.cap);
 	}
 
-	// Copy and swap idiom
-	String& operator=(String other) & { // only lvalue
+	String& operator=(String other) & {
 		swap(other);
 		return *this;
 	}
 
-	// operators without implicit conversion
 	bool operator<(const String& other) const{
 		return strcmp(str, other.str) < 0;
 	}
@@ -101,11 +98,11 @@ public:
 
 	void push_back(char c){
 		if (cap == 0){
-			cap = DEFAULT_CAPACITY;
+			cap = kDefaultCapacity;
 			str = new char[cap];
 		}
 		if(sz + 1 == cap){
-			char* new_str = new char[cap *= CAPACITY_EXPANSION];
+			char* new_str = new char[cap *= kCapacityExpansion];
 			memcpy(new_str, str, sz + 1);
 			delete[] str;
 			str = new_str;
@@ -141,11 +138,11 @@ public:
 
 	String& operator+=(const String& other){
 		if (cap == 0){
-			cap = (DEFAULT_CAPACITY < other.sz + 1) ? other.sz + 1 : DEFAULT_CAPACITY;
+			cap = (kDefaultCapacity < other.sz + 1) ? other.sz + 1 : kDefaultCapacity;
 			str = new char[cap];
 		}
 		if(sz + other.sz + 1 > cap){
-			cap = (cap * CAPACITY_EXPANSION < sz + other.sz + 1) ? sz + other.sz + 1 : cap * CAPACITY_EXPANSION;
+			cap = (cap * kCapacityExpansion < sz + other.sz + 1) ? sz + other.sz + 1 : cap * kCapacityExpansion;
 			char* new_str = new char[cap];
 			memcpy(new_str, str, sz);
 			delete[] str;
@@ -224,7 +221,6 @@ String operator""_str(const char* str, size_t){
 	return String(str);
 }
 
-// useful compiler optimization
 String operator+(const String& a, const String& b){
 	String copy = a;
 	copy += b;
