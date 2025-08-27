@@ -11,7 +11,7 @@ TEST(ConstructorTest, FromCString) {
 }
 
 TEST(ConstructorTest, EmptyCString) {
-    String s("");
+    std::string s("");
     EXPECT_EQ(s.size(), 0);
     EXPECT_STREQ(s.data(), "");
 }

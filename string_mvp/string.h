@@ -4,22 +4,28 @@
 
 class String{
 private:
-	char* str = nullptr;
-	size_t sz = 0;
-	size_t cap = 0;
+	char* str;
+	size_t sz;
+	size_t cap;
 	static constexpr size_t DEFAULT_CAPACITY = 8;
 	static constexpr size_t CAPACITY_EXPANSION = 2;
 
 public:
 	explicit String(const char* other) {
-		if(!other){str = nullptr; sz = 0; cap = 0; return;}
+		if(!other){cap = 1; sz = 0; str = new char[cap]; str[sz] = '\0'; return;}
 		sz = strlen(other);
 		cap = sz + 1;
 		str = new char[cap];
 		memcpy(str, other, sz + 1);
 	}
 
-	String() = default;
+	String() {
+		cap = 1;
+		sz = 0;
+		str = new char[cap];
+		str[sz] = '\0';
+	}
+
 
 	String(size_t n, char c): str(new char[n + 1]), sz(n), cap(n + 1){
 		memset(str, c, n);
@@ -150,6 +156,7 @@ public:
 	}
 
 	explicit String(char c): str(new char[2]), sz(1), cap(2){
+		str[0] = c;
 		str[1] = '\0';
 		if(c == '\0'){sz = 0;}
 	}
